@@ -15,6 +15,7 @@ find_package(ament_cmake REQUIRED)
 find_package(image_geometry REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(tracker_msgs REQUIRED)
 find_package(cv_bridge)
 
 include_directories(include)
@@ -28,6 +29,7 @@ ament_target_dependencies(depthimage_to_pointcloud2_node
   "rclcpp"
   "sensor_msgs"
   "cv_bridge"
+  "tracker_msgs"
 )
 
 install(TARGETS depthimage_to_pointcloud2_node

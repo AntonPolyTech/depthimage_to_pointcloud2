@@ -53,7 +53,7 @@ namespace depthimage_to_pointcloud2
 // Handles float or uint16 depths
 template<typename T>
 void convert(
-  const sensor_msgs::msg::Image::ConstSharedPtr & depth_msg,
+  const sensor_msgs::msg::Image depth_msg,
   sensor_msgs::msg::PointCloud2::SharedPtr & cloud_msg,
   const image_geometry::PinholeCameraModel & model,
   double range_max = 0.0,
@@ -74,8 +74,8 @@ void convert(
   sensor_msgs::PointCloud2Iterator<float> iter_y(*cloud_msg, "y");
   sensor_msgs::PointCloud2Iterator<float> iter_z(*cloud_msg, "z");
   sensor_msgs::PointCloud2Iterator<float> iter_rgb(*cloud_msg, "rgb");
-  const T * depth_row = reinterpret_cast<const T *>(&depth_msg->data[0]);
-  int row_step = depth_msg->step / sizeof(T);
+  const T * depth_row = reinterpret_cast<const T *>(&depth_msg.data[0]);
+  int row_step = depth_msg.step / sizeof(T);
   for (int v = 0; v < static_cast<int>(cloud_msg->height); ++v, depth_row += row_step) {
     for (int u = 0; u < static_cast<int>(cloud_msg->width); ++u, ++iter_x, ++iter_y, ++iter_z, ++iter_rgb) {
       T depth = depth_row[u];
